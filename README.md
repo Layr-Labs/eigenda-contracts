@@ -1,41 +1,34 @@
-![Unit Tests](https://github.com/Layr-Labs/eigenda/actions/workflows/unit-tests.yml/badge.svg)
-![Integration Tests](https://github.com/Layr-Labs/eigenda/actions/workflows/integration-tests.yml/badge.svg)
-![Linter](https://github.com/Layr-Labs/eigenda/actions/workflows/golangci-lint.yml/badge.svg)
-![Contracts](https://github.com/Layr-Labs/eigenda/actions/workflows/test-contracts.yml/badge.svg)
-![Go Coverage](https://github.com/Layr-Labs/eigenda/wiki/coverage.svg)
+# EigenDA Contracts
+This package contains all smart contracts used to power EigenDA's on-chain operations. This includes both core protocol logic and verification constructs that a rollup can leverage to verify certificate integrity. This project uses both NPM and local submodules for dependency management. Most recently published NPM release artifacts can be found [here](https://www.npmjs.com/package/@eigenda/contracts).
 
-# EigenDA
 
-## Overview
+### Install
+Please ensure you've installed latest [foundry nightly](https://book.getfoundry.sh/getting-started/installation) as well as [yarn](https://classic.yarnpkg.com/lang/en/docs/install). To install dependencies, run the following commands:
+```
+cd contracts
+yarn install
+forge install
+```
 
-EigenDA is a secure, high-throughput, and decentralized data availability (DA) service built on top of Ethereum using the [EigenLayer](https://github.com/Layr-Labs/eigenlayer-contracts) restaking primitives.
 
-To understand more about how EigenDA works and how it transforms the modern landscape of data availability, continue reading [EigenDA introduction](https://www.blog.eigenlayer.xyz/intro-to-eigenda-hyperscale-data-availability-for-rollups/).
+### Compile
+To compile contracts and generate golang ABI bindings, run the following:
+```
+make compile-contracts
 
-To dive deep into the technical details, continue reading [EigenDA protocol spec](https://github.com/Layr-Labs/eigenda/blob/master/docs/spec/overview.md).
+```
 
-If you're interested in integrating your rollup with EigenDA, please fill out the [EigenDA Partner Registration](https://docs.google.com/forms/d/e/1FAIpQLSdXvfxgRfIHWYu90FqN-2yyhgrYm9oExr0jSy7ERzbMUimJew/viewform).
+To just compile contracts, run the following:
+```
+yarn run build
+```
 
-## API Documentation
-
-The EigenDA public API is documented [here](https://github.com/Layr-Labs/eigenda/tree/master/api/docs).
-
-## Operating EigenDA Node
-
-If you want to be an EigenDA operator and run a node, please clone [Operator Setup Guide](https://github.com/Layr-Labs/eigenda-operator-setup) GitHub repo and follow the instructions there.
-
-## Contributing
-We welcome all contributions! There are many ways to contribute to the project, including but not limited to:
-
-- Opening a PR
-- [Submitting feature requests or bugs](https://github.com/Layr-Labs/eigenda/issues/new/choose)
-- Improving our product or contribution documentation
-- Voting on [open issues](https://github.com/Layr-Labs/eigenda/issues) or
-  contributing use cases to a feature request
-
-## Contact
-
-- [Open an Issue](https://github.com/Layr-Labs/eigenda/issues/new/choose)
-- [EigenLayer/EigenDA forum](https://forum.eigenlayer.xyz)
-- [Email](mailto:eigenda-support@eigenlabs.org)
-- [Follow us on X](https://x.com/eigen_da)
+### Testing
+Tests are all written using foundry and can be ran via the following commands:
+```
+yarn run test
+```
+or 
+```
+forge test -v
+```

@@ -1,23 +1,27 @@
-inabox/testdata/*
-inabox/anvil.pid
+# Compiler files
+cache/
+out/
 
-test/testdata/*
-inabox/resources/kzg/SRSTables/*
-encoding/kzgrs/prover/data/SRSTable/*
+# Ignores development broadcast logs
+!/broadcast
+/broadcast/*/31337/
+/broadcast/*/40525/
+/broadcast/**/dry-run/
 
-**/bin/*
-coverage.*
+# Docs
+docs/
 
-contracts/broadcast
-
-lightnode/docker/build-info.txt
-lightnode/docker/args.sh
-
-.idea
+# Dotenv file
 .env
-.vscode
 
-icicle/*
+data/
 
-# OSX specific
-.DS_Store
+script/output/*
+script/input/eigenda_deploy_config.json
+
+# yarn dependencies
+yarn.lock
+node_modules
+
+# release dependencies
+artifacts/
