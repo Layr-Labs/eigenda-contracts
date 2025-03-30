@@ -1,5 +1,5 @@
-[submodule "lib/eigenlayer-middleware.git"]
-	path = lib/eigenlayer-middleware.git
+[submodule "lib/eigenlayer-middleware"]
+	path = lib/eigenlayer-middleware
 	url = https://github.com/Layr-Labs/eigenlayer-middleware.git
 [submodule "lib/forge-std"]
 	path = lib/forge-std
