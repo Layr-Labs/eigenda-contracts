@@ -1,0 +1,59 @@
+name: test-contracts
+
+on:
+  push:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+env:
+  FOUNDRY_PROFILE: ci
+
+concurrency:
+  group: ${{github.workflow}}-${{github.ref}}
+  cancel-in-progress: true
+
+jobs:
+  fmt:
+    name: Enforce Contracts Formatting
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #4.2.2
+        with:
+          submodules: recursive
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+      - run: forge fmt --check
+
+  forge-tests:
+    name: Foundry Project
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #4.2.2
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+
+      - name: Install forge dependencies
+        run: |
+          yarn
+          forge install
+
+      - name: Run tests
+        run: forge test -vvv
+
