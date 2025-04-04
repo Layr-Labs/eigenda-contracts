@@ -57,3 +57,42 @@ jobs:
       - name: Run tests
         run: forge test -vvv
 
+  binding-verify:
+    name: Verify bindings are updated
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Install forge dependencies
+        run: |
+          yarn
+          forge install
+
+      - name: Setup Go 1.21.13
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.21.13"
+
+      - name: Install abi gen
+        run:
+          go install github.com/ethereum/go-ethereum/cmd/abigen@latest
+
+      - name: Bindings diff check
+        run: ./compile.sh && git diff --exit-code
