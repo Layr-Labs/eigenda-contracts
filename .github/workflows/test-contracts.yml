@@ -84,7 +84,6 @@ jobs:
         run: |
           yarn
           forge install
-        working-directory: ./contracts
 
       - name: Setup Go 1.21.13
         uses: actions/setup-go@v5
